@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html 5 Qr-code scanner</title>
+    <script src="html5-qrcode.min.js"></script>
+</head>
+<body>
+    <div style="width: 500px" id="reader"></div>
+    <div style="width: 500px" id="result"></div>
+    <script>
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 });
+        var result = document.getElementById('result');
+       
+        // function onScanSuccess(decodedText, decodedResult) {
+        //         // Handle on success condition with the decoded text or result.
+        //         console.log(`Scan result: ${decodedText}`, decodedResult);
+        //         }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            // Handle on success condition with the decoded text or result.
+            console.log(`Scan result: ${decodedText}`, decodedResult);
+            // ...
+            html5QrcodeScanner.clear();
+            // ^ this will stop the scanner (video feed) and clear the scan area.
+
+            result.innerHTML = `Scan result: ${decodedText}`, decodedResult
+        }
+
+        function onScanError(errorMessage) {
+            // handle on error condition, with error message
+        }
+
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+</body>
+</html>
